@@ -358,9 +358,10 @@ def process_complete_grid(output_file, n_lats_per_cluster):
                 v_req_alt = np.zeros((len(hours), len(heights_of_interest)))  # result array for writing interpolated data
 
                 for i_hr in range(len(hours)):
+                    n_alt = min(len(altitude_levels), v_levels.shape[1])
                     # np.interp requires x-coordinates of the data points to increase
-                    v_req_alt[i_hr, :] = np.interp(altitudes_of_interest, altitude_levels[::-1],
-                                                   v_levels[i_hr, ::-1, row_in_v_levels, i_lon])
+                    v_req_alt[i_hr, :] = np.interp(altitudes_of_interest, altitude_levels[(n_alt-2)::-1],
+                                                   v_levels[i_hr, (n_alt-2)::-1, row_in_v_levels, i_lon])
 
                 rho_req_alt = get_density_at_altitude(altitudes_of_interest)
                 p_req_alt = calc_power(v_req_alt, rho_req_alt)
