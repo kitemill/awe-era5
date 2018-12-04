@@ -512,6 +512,7 @@ def eval_single_location(location_lat, location_lon, start_year, final_year):
     check_for_missing_data(hours)
     surface_elevation = get_surface_elevation(lats, lons)
 
+
     i_lat = list(lats).index(location_lat)
     i_lon = list(lons).index(location_lon)
 
@@ -526,9 +527,14 @@ def eval_single_location(location_lat, location_lon, start_year, final_year):
     altitudes_of_interest = heights_of_interest + surf_elev
     v_req_alt = np.zeros((len(hours), len(heights_of_interest)))  # result array for writing interpolated data
 
+
+    #import pdb
+    #pdb.set_trace()
+
+    count = len(v_levels[0])
     for i_hr in range(len(hours)):
         # np.interp requires x-coordinates of the data points to increase
-        v_req_alt[i_hr, :] = np.interp(altitudes_of_interest, altitude_levels[::-1], v_levels[i_hr, ::-1])
+        v_req_alt[i_hr, :] = np.interp(altitudes_of_interest, altitude_levels[count:0:-1], v_levels[i_hr, ::-1])
 
     v_ceilings = np.zeros((len(hours), len(analyzed_heights_ids['ceilings'])))
     optimal_heights = np.zeros((len(hours), len(analyzed_heights_ids['ceilings'])))

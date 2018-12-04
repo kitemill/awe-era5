@@ -261,8 +261,9 @@ def plot_figure_6d(v_ceilings, ceiling_heights):
 
 def main():
     """Reproduce plots as presented in the paper."""
-    eval_lat = 51.0
-    eval_lon = 1.0
+    """ Hainan Dongfang offshore windpark https://www.thewindpower.net/windfarm_map_en_10354_hainan-dongfang-offshore-windfarm.php """
+    eval_lat = 19.0
+    eval_lon = 108.5
 
     # Plots of figure 5 use data from 2016.
     start_year = 2016
@@ -274,7 +275,7 @@ def main():
                    analyzed_heights_ids['ceilings'][1], analyzed_heights_ids['floor'])
 
     # Plots of figure 6 use data from 2011 until 2017.
-    start_year = 2011
+    start_year = 2013
     end_year = 2017
     hours, v_req_alt, v_ceilings, optimal_heights = eval_single_location(eval_lat, eval_lon, start_year, end_year)
     plot_figure_6a(optimal_heights[:, 1])
