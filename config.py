@@ -19,15 +19,20 @@ Attributes:
 
 """
 # General settings.
-start_year = 2011
-final_year = 2017
-era5_data_dir = '~/ERA5Data/'
+start_year = 2014
+final_year = 2014
+# era5_data_dir = '/Users/tallakt/awe-era5/all/data'
+era5_data_dir = '/Volumes/OSP-TT/awe_era5/data_no/' # norway
+# era5_data_dir = '/Users/tallakt/awe-era5/data_cn' # china
 wind_file_name_format = 'era5_wind_data_{:d}_{:02d}.netcdf'
 geopotential_file_name = 'era5_geopotential.netcdf'
 
 # Downloading settings.
-area = "65/-20/30/20"
-grid = "coarse"
+# N/W/S/E
+area = "72/3/57/33" # norway
+# area = "60/65/15/145" # china
+# grid = "coarse"
+grid = "fine"
 
 # Processing settings.
 output_file_name = "results/processed_data_{:d}_{:d}.nc".format(start_year, final_year)

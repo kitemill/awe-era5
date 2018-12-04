@@ -18,6 +18,12 @@ from utils import get_density_at_altitude, hour_to_date_str
 from config import start_year, final_year, era5_data_dir, wind_file_name_format, geopotential_file_name,\
     output_file_name, n_lats_per_cluster
 
+def interact():
+    import code
+    code.InteractiveConsole(locals=globals()).interact()
+
+
+
 # Set the relevant heights for the different analysis types.
 analyzed_heights = {
     'floor': 50.,
@@ -196,7 +202,9 @@ def process_complete_grid(output_file, n_lats_per_cluster):
             Highest number allowed by memory capacity should be opted for reducing computation time.
 
     """
+    print "A"
     nc, lons, lats, levels, hours = read_raw_data(start_year, final_year)
+    print "B"
     check_for_missing_data(hours)
     surface_elevation = get_surface_elevation(lats, lons)
 
@@ -359,8 +367,10 @@ def process_complete_grid(output_file, n_lats_per_cluster):
 
                 for i_hr in range(len(hours)):
                     # np.interp requires x-coordinates of the data points to increase
+                    #import pdb
+                    #pdb.set_trace()
                     v_req_alt[i_hr, :] = np.interp(altitudes_of_interest, altitude_levels[::-1],
-                                                   v_levels[i_hr, ::-1, row_in_v_levels, i_lon])
+                                                   v_levels[i_hr, :0:-1, row_in_v_levels, i_lon])
 
                 rho_req_alt = get_density_at_altitude(altitudes_of_interest)
                 p_req_alt = calc_power(v_req_alt, rho_req_alt)
@@ -508,6 +518,9 @@ def eval_single_location(location_lat, location_lon, start_year, final_year):
 
     """
     nc, lons, lats, levels, hours = read_raw_data(start_year, final_year)
+    from pprint import pprint
+    pprint(locals())
+    pprint(vars(lons))
     check_for_missing_data(hours)
     surface_elevation = get_surface_elevation(lats, lons)
 
