@@ -19,15 +19,17 @@ Attributes:
 
 """
 # General settings.
-start_year = 2011
+start_year = 2014
 final_year = 2017
-era5_data_dir = '~/ERA5Data/'
+era5_data_dir = '/Volumes/TALLAK_500G/awe-era5/data-texas' # china
 wind_file_name_format = 'era5_wind_data_{:d}_{:02d}.netcdf'
 geopotential_file_name = 'era5_geopotential.netcdf'
 
 # Downloading settings.
-area = "65/-20/30/20"
+# N/W/S/E
+area = "38/-107/25/-93" # texas
 grid = "coarse"
+# grid = "fine"
 
 # Processing settings.
 output_file_name = "results/processed_data_{:d}_{:d}.nc".format(start_year, final_year)
